@@ -1,5 +1,6 @@
 package com.shofiq.myplayer.ui.activities
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -11,6 +12,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.shofiq.myplayer.R
 import com.shofiq.myplayer.databinding.ActivityMainBinding
+import android.graphics.drawable.ColorDrawable
+import androidx.appcompat.app.ActionBar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,21 +25,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val splashScreen = installSplashScreen()
 //        splashScreen.setOnExitAnimationListener(listener = {
-//            Toast.makeText(this, "Splash screen over", Toast.LENGTH_SHORT).show()
+////            Toast.makeText(this, "Splash screen over", Toast.LENGTH_SHORT).show()
 //        })
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
         setupNavigation()
+
     }
 
     private fun setupNavigation() {
-        val navHostFreagment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFreagment.findNavController()
-
-        val appbarCOnfigation =  AppBarConfiguration(setOf(R.id.allVideosFragment, R.id.allFoldersFragment))
-        setupActionBarWithNavController(navController, appbarCOnfigation)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.findNavController()
+        val actionBar: ActionBar? = supportActionBar
+        actionBar!!.elevation = 10f
         binding.bottomNav.setupWithNavController(navController)
     }
 }
